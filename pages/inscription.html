@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire d'Inscription</title>
+  <link rel="stylesheet" href="../assets/css/incription.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Inscription</h2>
+    <form id="registration-form">
+      <!-- Nom complet -->
+      <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" placeholder="Entrez votre nom" required>
+        <div class="error-message" id="name-error">Veuillez entrer un nom valide.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Prénom</label>
+        <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required>
+        <div class="error-message" id="name-error">Veuillez entrer un prénom valide.</div>
+      </div>
+
+      <!-- E-mail -->
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="Entrez votre e-mail" required>
+        <div class="error-message" id="email-error">Veuillez entrer un e-mail valide.</div>
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+        <div class="error-message" id="password-error">Le mot de passe doit contenir au moins 6 caractères.</div>
+      </div>
+
+      <!-- Confirmation du mot de passe -->
+      <div class="form-group">
+        <label for="confirm-password">Confirmez le mot de passe</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirmez votre mot de passe" required>
+        <div class="error-message" id="confirm-password-error">Les mots de passe ne correspondent pas.</div>
+      </div>
+
+      <!-- Bouton d'inscription -->
+      <button type="submit">S'inscrire</button>
+    </form>
+
+    <!-- Lien vers la connexion -->
+    <p>Déjà inscrit ? <a href="../pages/connexion.html">Connectez-vous ici</a></p>
+  </div>
+
+  <script>
+    // Validation du formulaire
+    const form = document.getElementById('registration-form');
+    const nameInput = document.getElementById('name');
+    const prenomInput = document.getElementById('prenom');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm-password');
+
+    const nameError = document.getElementById('name-error');
+    const prenomError = document.getElementById('prenom-error');
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+    const confirmPasswordError = document.getElementById('confirm-password-error');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+
+      // Validation du nom
+      if (nameInput.value.trim() === '') {
+        nameError.style.display = 'block';
+        nameInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        nameError.style.display = 'none';
+        nameInput.classList.remove('invalid');
+      }
+
+      // Validation du prénom
+      if (prenomInput.value.trim() === '') {
+        prenomError.style.display = 'block';
+        prenomInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        prenomError.style.display = 'none';
+        prenomInput.classList.remove('invalid');
+      }
+
+      // Validation de l'e-mail
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailInput.value)) {
+        emailError.style.display = 'block';
+        emailInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        emailError.style.display = 'none';
+        emailInput.classList.remove('invalid');
+      }
+
+      // Validation du mot de passe
+      if (passwordInput.value.length < 6) {
+        passwordError.style.display = 'block';
+        passwordInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        passwordError.style.display = 'none';
+        passwordInput.classList.remove('invalid');
+      }
+
+      // Validation de la confirmation du mot de passe
+      if (confirmPasswordInput.value !== passwordInput.value) {
+        confirmPasswordError.style.display = 'block';
+        confirmPasswordInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        confirmPasswordError.style.display = 'none';
+        confirmPasswordInput.classList.remove('invalid');
+      }
+
+      // Soumission du formulaire si valide
+      if (isValid) {
+        alert('Inscription réussie !');
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>

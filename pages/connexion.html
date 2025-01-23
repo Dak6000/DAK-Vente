@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page de Connexion</title>
+  <link rel="stylesheet" href="../assets/css/connexion.css">
+</head>
+<body>
+  <div class="form-container">
+    <h2>Connexion</h2>
+    <form id="login-form">
+      <!-- E-mail -->
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" placeholder="Entrez votre e-mail" required>
+        <div class="error-message" id="email-error">Veuillez entrer un e-mail valide.</div>
+      </div>
+
+      <!-- Mot de passe -->
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+        <div class="error-message" id="password-error">Le mot de passe est incorrect.</div>
+      </div>
+
+      <!-- Bouton de connexion -->
+      <button type="submit">Se connecter</button>
+    </form>
+
+    <!-- Lien vers l'inscription -->
+    <p>Pas encore inscrit ? <a href="../pages/inscription.html">Inscrivez-vous ici</a></p>
+  </div>
+
+  <script>
+    // Validation du formulaire
+    const form = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+
+    const emailError = document.getElementById('email-error');
+    const passwordError = document.getElementById('password-error');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+
+      // Validation de l'e-mail
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailInput.value)) {
+        emailError.style.display = 'block';
+        emailInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        emailError.style.display = 'none';
+        emailInput.classList.remove('invalid');
+      }
+
+      // Validation du mot de passe
+      if (passwordInput.value.length < 6) {
+        passwordError.style.display = 'block';
+        passwordInput.classList.add('invalid');
+        isValid = false;
+      } else {
+        passwordError.style.display = 'none';
+        passwordInput.classList.remove('invalid');
+      }
+
+      // Soumission du formulaire si valide
+      if (isValid) {
+        alert('Connexion réussie !');
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
